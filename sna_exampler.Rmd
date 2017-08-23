@@ -1,0 +1,113 @@
+---
+title: "social_network_analysis"
+author: "Fan Ouyang"
+date: "August 22, 2017"
+output: html_document
+---
+## An exampler of social network analysis with two different dataset format
+### adjacency matrix (wide-format)
+The first format is adjacency matrix (refer to http://faculty.ucr.edu/~hanneman/nettext/C5_%20Matrices.html for more details). This format can be considered as wide-format (in contrast with long-format, which will be discussed as the second format)
+#### one-mode network analysis
+ It is usually used in one-mode network analysis (e.g. learner-learner interaction network). In this example, I use edge width to show degree(indegree and outdegree), and color to show students and the instructor
+ 
+```{r message = FALSE, warning = FALSE}
+require(sna)
+# read data in
+one_mode_mat<- as.matrix(read.csv("one_mode_ad_mat.csv", row.names=1))
+colnames(one_mode_mat)=c("A","B","C","Ins")
+rownames(one_mode_mat)=c("A","B","C","Ins")
+# calculate degree
+id<-degree(one_mode_mat,gmode="digraph",cmode="indegree")
+od<-degree(one_mode_mat,gmode="digraph",cmode="outdegree")
+# create color vector to show different colors for student and instructor
+stu <- rep("magenta3", 3)
+ins <- rep("darkolivegreen4", 1) # final one is the instructor
+color <- c(stu, ins)
+# plot one-mode network graph
+gplot(one_mode_mat, gmode="graph", displaylabels=TRUE, 
+      label.cex = 0.7, label.col = "gray8", label.pos = 5,
+      vertex.cex=2, vertex.col = color, 
+      edge.col = "gray38", edge.lwd=(id+od)/3)
+```
+
+#### two-mode network analysis
+Adjacency matrix can also be used in two-mode network analysis. Here is another example of using adjacency matrix to create learner-activity participation network. In this example, I use color and shape to separately show people and activities and edge width to show a people's participation frequency in an activity
+
+```{r message = FALSE, warning = FALSE}
+require(sna)
+two_mode_mat<- as.matrix(read.csv("two_mode_ad_mat.csv",row.names=1))
+# create edge vector, saving participation frequency
+edge<-c(two_mode_mat[,1],two_mode_mat[,2],two_mode_mat[,3],two_mode_mat[,4])
+# create color vector to show different colors for people and activities
+people <- rep("magenta3", 4)
+activity <- rep("darkolivegreen4", 4)
+color <- c(people, activity)
+# plot two-mode network graph
+gplot(two_mode_mat, gmode = "twomode", usearrows = F, displaylabels = T, 
+      label.cex = 0.7, label.col = "gray8", label.pos = 5, 
+      vertex.col = color, vertex.cex = 2,
+      edge.col = "gray38", edge.lwd=edge/2,
+      mode="fruchtermanreingold")
+```
+
+### edgelist format (long-format)
+#### one-mode(or two-mode) network analysis
+Like the way adjacency matrix is used for one-mode and two-mode network analysis, edgelist format can also be used for both one and two-mode network analysis
+
+```{r message = FALSE, warning = FALSE}
+require(reshape2)
+require(igraph)
+# convert wide-format matrix to long-format edgelist by using melt function
+one_mode_ed=melt(one_mode_mat)
+# convert edgelist to igraph format
+one_mode_graph=graph.data.frame(one_mode_ed)
+#plot with igraph, please refer to http://igraph.org/r/doc/plot.common.html for more details
+plot(one_mode_graph,vertex.size=2,
+     vertex.label.dist=0.5, vertex.color="red")
+```
+
+#### I prefer to use sna package for network graph demonstration, so I convert igraph into matrix or network 
+```{r}
+#convert igraph to matrix
+one_mode_mat02=as.matrix(get.adjacency(one_mode_graph))
+# then we can use the previous method to create graphs
+gplot(one_mode_mat02,gmode = "graph", usearrows = F, displaylabels = T)
+```
+
+### node-level and network-level measures
+```{r}
+# use sna package to calculate node-level centralities
+node.centrality<-function(x){
+           require(sna)
+           central.nodes<-cbind(degree(x,cmode="indegree"), degree(x,cmode="outdegree"), betweenness(x,rescale=T),
+                                closeness(x,cmode="directed",rescale=T))
+           colnames(central.nodes)<-c("indegree","outdegree","betweenness","closeness")
+           rownames(central.nodes)<-x%v%"vertex.names"
+          
+           
+           list(central.nodes)
+         }
+
+
+# use igraph to calculate network-level measures
+network.measure<-function(x){
+      require(igraph)
+      graph.measure<-cbind(as.numeric(length(V(x))),
+                        as.numeric(length(E(x))),
+                        as.numeric(diameter(x)),
+                        as.numeric(graph.density(x)),
+                        as.numeric(reciprocity(x)),
+                        as.numeric(transitivity(x)),
+                        as.numeric(average.path.length(x, unconnected=FALSE)), # important
+                        as.numeric(mean(graph.strength(x))))
+  
+                        colnames(graph.measure)<-c("nodes","edges","diameter",
+                              "density","reciprocity","transitivity",
+                              "average path length","average weighted degree")
+                        rownames(graph.measure)<-"x"
+                        list(graph.measure)
+}
+```
+
+### summary
+There are basically two formats for save network data: adjacency matrix (wide-format) and edgelist (long-format). We can use reshape2 package (http://seananderson.ca/2013/10/19/reshape.html) to convert them mutually. Then we can use sna or igraph packages to plot and calculate node-level and network-level measures. It is useful to master both packages, converting them freely and applying to achieve different purposes.
