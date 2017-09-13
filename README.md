@@ -1,2 +1,4 @@
-This is the sna_exampler for [A brief overview of a recent publication on a social network analysis study of online learning community development] (http://fanouyang.net/2017/07/28/a-brief-overview-of-a-recent-publication-on-a-social-network-analysis-study-of-online-learning-community-development/).
-please see rpub page http://rpubs.com/fanouyang/301500
+- This is the sna_exampler for [A brief overview of a recent publication on a social network analysis study of online learning community development] (http://fanouyang.net/2017/07/28/a-brief-overview-of-a-recent-publication-on-a-social-network-analysis-study-of-online-learning-community-development/).
+- Rpub page http://rpubs.com/fanouyang/301500
+- Shinyapp demo https://fanouyang.shinyapps.io/sna_demo/
+- Original resesarch article by Ouyang. F & Scharber C. (2017) http://www.sciencedirect.com/science/article/pii/S1096751616302585
