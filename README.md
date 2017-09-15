@@ -9,3 +9,6 @@
 
 #### Reference
 - Original resesarch article by Ouyang. F & Scharber C. (2017) http://www.sciencedirect.com/science/article/pii/S1096751616302585
+
+#### Note
+- Please cite these resources i.e., the original article, my blog, or this github repo in your work
