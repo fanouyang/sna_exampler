@@ -5,10 +5,10 @@ date: "August 22, 2017"
 output: html_document
 ---
 ## An exampler of social network analysis with two different formats
-This example shows how to use popular SNA packages (i.e., *sna* and *igraph*) to conduct network analysis for are two primary data formats, namely adjacency matrix and edgelist.
+This example shows how to use popular SNA packages (i.e., *sna* and *igraph*) to conduct network analysis for are two primary data formats, namely *adjacency matrix* and *edgelist*.
 
 ### 1.adjacency matrix (wide-format)
-The first format is adjacency matrix (refer to http://faculty.ucr.edu/~hanneman/nettext/C5_%20Matrices.html for more details). This format can be considered as wide-format (in contrast with the second format: long-format)
+The first format is [adjacency matrix](http://faculty.ucr.edu/~hanneman/nettext/C5_%20Matrices.html). This format can be considered as wide-format (in contrast with the second format: long-format)
 #### one-mode network analysis
 Adjacency matrix dataset is usually used in one-mode network analysis (e.g. learner-learner interaction network). Pls refer to data folder in my github repo for the csv file. In this example, I use *edge width* to show degree(indegree and outdegree), and *color* to show students and the instructor. Here I use *sna* package to show how to plot socio-graph.
  
@@ -35,7 +35,7 @@ gplot(one_mode_mat, gmode="graph", displaylabels=TRUE,
 ```
 
 #### two-mode network analysis
-Adjacency matrix can also be used in two-mode network analysis. Here is another example of using adjacency matrix to create learner-activity participation network. Pls refer to data folder in my github repo for the csv file. In this example, I use *color* and *shape* to separately show people and activities and *edge width* to show a person's participation frequency in an activity. Here I use *sna* package to show how to plot socio-graph.
+Adjacency matrix can also be used in two-mode network analysis. This example shows how to use adjacency matrix to create two-mode learner-activity participation network. In this example, I use *color* and *shape* to separately show people and activities and *edge width* to show a person's participation frequency in an activity. Here I use *sna* package to show how to plot socio-graph.
 
 ```{r message = FALSE, warning = FALSE}
 require(sna)
@@ -120,7 +120,7 @@ network.measure(one_mode_graph)
 ```
 
 #### grouping
-sometimes, we need to grouping in SNA, for example, show different groups with different colors. here I show an example using dplyr to assign individuals to groups and then assign different colors to the groups. I use igraph here to plot socio-graph here.
+sometimes, we need to grouping in SNA, for example, showing different groups with different colors. This example assigns individuals to different groups and then assign colors to the groups. I use *igraph* here to plot socio-graph here.
 ```{r}
 require(dplyr)
 require(igraph)
@@ -145,6 +145,6 @@ plot(sna_graph,
 ```
 
 ### summary
-- There are basically two formats for save network data: adjacency matrix (wide-format) and edgelist (long-format). We can use reshape2 package (http://seananderson.ca/2013/10/19/reshape.html) to convert them mutually. 
+- There are basically two formats for save network data: adjacency matrix (wide-format) and edgelist (long-format). We can use *reshape2* package (http://seananderson.ca/2013/10/19/reshape.html) to convert them mutually. 
 - We can use *sna* or *igraph* packages to plot sociographs and write functions to calculate node-level and network-level measures, using sna and igraph format respectively. Note: sna package uses *network* format; *igraph* package uses *igraph* format.
 - It is useful to master both packages, converting two foramts mutually and applying them to achieve different purposes.
