@@ -1,7 +1,7 @@
 #### Intro
 - This is the sna_exampler for [A brief overview of a recent publication on a social network analysis study of online learning community development](http://fanouyang.net/2017/07/28/a-brief-overview-of-a-recent-publication-on-a-social-network-analysis-study-of-online-learning-community-development/)
 
-- Please read sna_exampler.Rmd for coding process and relevant explanations. 
+- sna_exampler.Rmd shows coding process and relevant explanations. 
 
 - Check out more info at my Rpub page http://rpubs.com/fanouyang/301500 or the Shinyapp demo for this exampler https://fanouyang.shinyapps.io/sna_demo/
 
