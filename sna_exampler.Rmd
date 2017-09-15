@@ -5,7 +5,7 @@ date: "August 22, 2017"
 output: html_document
 ---
 ## An exampler of social network analysis with two different formats
-In this markdown, I show an example of how to use popular SNA packages (i.e., *sna* and *igraph*) to conduct SNA analysis. There are two data format, namely adjacency matrix and edgelist.
+This example shows how to use popular SNA packages (i.e., *sna* and *igraph*) to conduct network analysis for are two primary data formats, namely adjacency matrix and edgelist.
 
 ### 1.adjacency matrix (wide-format)
 The first format is adjacency matrix (refer to http://faculty.ucr.edu/~hanneman/nettext/C5_%20Matrices.html for more details). This format can be considered as wide-format (in contrast with the second format: long-format)
