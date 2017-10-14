@@ -7,6 +7,9 @@
 
 - A short presentation about this research can be found [here](http://audioslides.elsevier.com/ViewerSmall.aspx?doi=10.1016/j.iheduc.2017.07.002&Source=0&resumeTime=0&resumeSlideIndex=0&width=800&height=639).
 
+#### Integrated analysis combining SNA (social engagement) with CA (cognitive engagement)
+- Check out the Shinyapp demo for the integrated analysis https://fanouyang.shinyapps.io/CogEng_Role/
+
 #### Reference
 - Original resesarch article by Ouyang. F & Scharber C. (2017) http://www.sciencedirect.com/science/article/pii/S1096751616302585
 
