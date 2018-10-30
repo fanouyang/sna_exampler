@@ -143,6 +143,8 @@ plot(sna_graph,
      vertex.label.cex = 0.8,
      edge.arrow.size = 0.5)
 ```
+### 3.edgelist format (long-format) to matrix (wide-format)
+
 
 ### summary
 - There are basically two formats for save network data: adjacency matrix (wide-format) and edgelist (long-format). We can use *reshape2* package (http://seananderson.ca/2013/10/19/reshape.html) to convert them mutually. 
