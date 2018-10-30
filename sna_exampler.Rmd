@@ -144,7 +144,16 @@ plot(sna_graph,
      edge.arrow.size = 0.5)
 ```
 ### 3.edgelist format (long-format) to matrix (wide-format)
+if we have an edgelist(long-format)data, we can use reshape2::cast/dcast to convert the edgelist to a matrix(wide-format)
 
+```{r}
+library(reshape2)
+library(dplyr)
+class_data_new<- edge_list_data %>% select(vert1_id,vert2_id)
+class_data_new<- read.csv("edge_list_data.csv")
+class_data_new %>% group_by(vert1_id,vert2_id) %>% summarize(fre=n())
+class_data_new<-class_data_new %>% dcast(vert1_id~vert2_id)
+```
 
 ### summary
 - There are basically two formats for save network data: adjacency matrix (wide-format) and edgelist (long-format). We can use *reshape2* package (http://seananderson.ca/2013/10/19/reshape.html) to convert them mutually. 
